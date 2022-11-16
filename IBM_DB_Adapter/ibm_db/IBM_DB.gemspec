@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/ibmdb/ruby-ibmdb'
   spec.required_ruby_version = '>= 2.5.0'
   spec.add_dependency('zip')
-  spec.add_dependency('activerecord', '<6.2')
-  spec.requirements << 'ActiveRecord, at least 6.1'
+  spec.add_dependency('activerecord', '<7.1.0')
+  spec.requirements << 'ActiveRecord, at least 7.1.0'
 
   candidates = Dir.glob("**/*")
   spec.files = candidates.delete_if do |item|
@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   if RUBY_PLATFORM =~ /mswin32/ || RUBY_PLATFORM =~ /mingw/
     spec.platform = Gem::Platform::CURRENT
     spec.add_dependency('archive-zip', '>= 0.7.0')
-    spec.extensions << 'ext/extconf.rb'	  
+    spec.extensions << 'ext/extconf.rb'
   else
     spec.files = candidates.delete_if { |item| item.include?("lib/mswin32") }
     puts ".. Check for the pre-built IBM_DB driver for this platform: #{RUBY_PLATFORM}"
@@ -48,8 +48,8 @@ Gem::Specification.new do |spec|
     if drv_lib.file? #&& (require "#{drv_lib.to_s}") #Commenting condition check as Ruby-1.9 does not recognize files from local directory
       puts ".. ibm_db driver was found:   #{drv_lib.realpath}"
     else
-      puts ".. ibm_db driver binary was not found. The driver native extension to be built during install."	  
-      spec.extensions << 'ext/extconf.rb'	  
+      puts ".. ibm_db driver binary was not found. The driver native extension to be built during install."
+      spec.extensions << 'ext/extconf.rb'
     end
   end
 
